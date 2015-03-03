@@ -1,0 +1,11 @@
+`<!--partial form add to edit and new-->
+
+<%= form_for(@song) do |f|%>
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+
+	<%= f.label :artist %>
+	<%= f.text_field :artist %>
+
+	<%= f.submit %>
+	<% end %>
