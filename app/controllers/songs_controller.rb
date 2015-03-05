@@ -17,6 +17,7 @@ class SongsController < ApplicationController
 
 	def create
 		song = Song.new(song_params)	
+		song.user_id = user.id
 		if song.save
 			redirect_to song
 		else
@@ -53,6 +54,6 @@ class SongsController < ApplicationController
 
 	def song_params
 		#strong params
-		params.require(:song).permit(:title, :artist)
+		params.require(:song).permit(:title, :artist, :user_id)
 	end
 end
