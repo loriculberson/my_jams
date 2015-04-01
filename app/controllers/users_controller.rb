@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
-		if admin?
+		if current_user.admin?
 			render :show
 		elsif current_user.id != params[:id].to_i
 			flash[:dumbass] = "You are not authorized to access this page"
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   private
 
 	def authorize
-		if not signed_in?
+		if current_user.nil?   		#if not signed_in?
 			flash[:alert] = "Not authorized"
 			redirect_to login_path
 		end
