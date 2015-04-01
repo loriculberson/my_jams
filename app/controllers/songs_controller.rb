@@ -3,7 +3,14 @@ class SongsController < ApplicationController
 	before_action :set_song, only: [:show, :update, :edit, :destroy]
 
 	def index
-		@songs = Song.all
+		if current_user.admin?
+			@songs = Song.all
+		elsif current_user
+			@songs = Song.where(user_id: current_user.id)
+			#current_user.songs
+		else
+			redirect_to login_path
+		end
 	end
 
 	def show
@@ -17,9 +24,10 @@ class SongsController < ApplicationController
 
 	def create
 		song = Song.new(song_params)	
-		song.user_id = user.id
+		song.user_id = current_user.id
+		
 		if song.save
-			redirect_to song
+			redirect_to song #user_song_path
 		else
 			#return to the page where you tried to enter a song but must have missed one of the parameters
 			render :new

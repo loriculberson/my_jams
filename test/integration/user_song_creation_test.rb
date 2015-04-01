@@ -12,3 +12,5 @@ class UserSongCreationTest < ActionDispatch::IntegrationTest
 		end
 
 end
+
+

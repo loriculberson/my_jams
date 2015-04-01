@@ -8,13 +8,13 @@ class ApplicationController < ActionController::Base
   	@current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-  def admin?
-  	current_user.admin?
-  end
+  # def admin?
+  # 	current_user.admin?
+  # end
 
-  def signed_in?
-  	!current_user.nil?
-  	#when not signed in current_user is nil
-  end
+  # def signed_in?
+  # 	!current_user.nil?
+  # 	#when not signed in current_user is nil
+  # end
 
 end
